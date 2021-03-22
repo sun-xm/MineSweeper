@@ -1,10 +1,16 @@
 #content {
     display: flex;
     flex-direction: column;
+    user-select: none;
 }
 
 #content .space {
     flex-grow: 1;
+}
+
+#content .label {
+    font-size: 17px;
+    margin-right: 10px;
 }
 
 #content .cell {

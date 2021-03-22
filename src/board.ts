@@ -229,7 +229,7 @@ export class Board extends Module {
     }
 
     private generate(row: number, col: number) {
-        let rate = this.mines / (this.rows * this.cols);
+        let rate = this.mines / (this.rows * this.cols) * 0.2;
         let count = 0;
         while (count < this.mines) {
             for (let i = 0; i < this.rows && count < this.mines; i++) {
