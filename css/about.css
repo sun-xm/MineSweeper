@@ -1,0 +1,11 @@
+body {
+    margin: 0px;
+}
+
+#content>* {
+    margin: 10px;
+}
+
+#content>div {
+    text-align: right;
+}

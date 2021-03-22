@@ -1,0 +1,71 @@
+.dropdown-menu,
+.popup-menu {
+    background-color: white;
+    border: 1px solid;
+    border-color: transparent black black black;
+    box-shadow: 3px 4px 3px 1px rgba(0, 0, 0, 0.2);
+    display: none;
+    font-size: 12px;
+    padding: 3px 0px;
+}
+
+.popup-menu {
+    border: 1px solid black;
+}
+
+.dropdown-menu>*,
+.popup-menu>* {
+    display: flex;
+    margin: 3px 0px;
+    padding: 3px 20px;
+    user-select: none;
+}
+
+.dropdown-menu>.item.check,
+.dropdown-menu>.item.radio,
+.popup-menu>.item.check,
+.popup-menu>.item.radio {
+    padding-left: 5px;
+}
+
+.dropdown-menu>.item .check-mark,
+.popup-menu>.item .check-mark {
+    visibility: hidden;
+}
+
+.dropdown-menu>.item.checked .check-mark,
+.popup-menu>.item.checked .check-mark {
+    visibility: visible;
+}
+
+.dropdown-menu>.item:hover:not(.checked):not(.disabled) .check-mark,
+.popup-menu>.item:hover:not(.checked):not(.disabled) .check-mark {
+    opacity: 0.2;
+    visibility: visible;
+}
+
+.dropdown-menu>.disabled,
+.popup-menu>.disabled {
+    color: #b0b0b0;
+}
+
+.dropdown-menu>.menu>.space,
+.popup-menu>.menu>.space {
+    flex-grow: 1;
+    min-width: 10px;
+}
+
+.dropdown-menu>.item:hover:not(.disabled),
+.dropdown-menu>.menu:hover:not(.disabled),
+.popup-menu>.item:hover:not(.disabled),
+.popup-menu>.menu:hover:not(.disabled) {
+    background-color: #e0e0e0;
+}
+
+.dropdown-menu>.separator,
+.popup-menu>.separator {
+    background-color: black;
+    height: 1px;
+    margin: 5px 5px;
+    padding: 0px;
+}

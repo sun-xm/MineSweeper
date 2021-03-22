@@ -1,0 +1,25 @@
+html {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    margin: 0px;
+}
+
+#content {
+    flex-grow: 1;
+    overflow: hidden;
+}
+
+#status {
+    background-color: #fafafa;
+    border: 1px black;
+    border-style: solid none none none;
+    font-size: 12px;
+    height: 20px;
+    min-height: 20px;
+    padding: 3px 5px 0px 5px;
+}

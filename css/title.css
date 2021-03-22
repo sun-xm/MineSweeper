@@ -1,0 +1,45 @@
+#title {
+    background-color: #b0b0b0;
+    color: black;
+    cursor: default;
+    display: flex;
+    font-size: 12px;
+    user-select: none;
+}
+#title>div {
+    border: 1px solid;
+    border-color: transparent transparent black transparent;
+}
+#title #caption {
+    display: flex;
+    flex-grow: 1;
+    font-weight: bold;
+    padding: 5px 20px;
+    -webkit-app-region: drag;
+}
+#title #caption .space {
+    flex-grow: 1;
+}
+#title #icon {
+    padding: 3.6px 7px;
+}
+#title .menu {
+    padding: 5px 10px;
+}
+#title .menu.active {
+    background-color: white;
+    border-color: black black transparent black;
+}
+#title .menu:hover{
+    background-color: white;
+    border-color: black black transparent black;
+}
+#title .system {
+    padding: 5px 15px;
+}
+#title .system:hover {
+    background-color: #a0a0a0;
+}
+#title #close:hover {
+    background-color: red;
+}
