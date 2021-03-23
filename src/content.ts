@@ -28,7 +28,7 @@ export class Content extends Module {
             case Size.Medium: {
                 rows  = 16;
                 cols  = 16;
-                mines = 60;
+                mines = 40;
                 break;
             }
 
