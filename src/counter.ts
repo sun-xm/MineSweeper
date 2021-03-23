@@ -46,6 +46,8 @@ export class Counter extends Module {
     }
 
     reset() {
+        this.stop();
+        
         let html = '<img src="img/0.svg"/><img src="img/0.svg"/><img src="img/0.svg"/>';
         (<HTMLElement>this.element.querySelector('#time')).innerHTML = html;
         (<HTMLElement>this.element.querySelector('#left')).innerHTML = html;

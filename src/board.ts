@@ -186,7 +186,7 @@ export class Board extends Module {
 
         this.forEachCell((c=>{
             if (c.isMine) {
-                while (State.Flagged != c.state) {
+                if (State.Flagged != c.state) {
                     this.flagged += c.flag();
                 }
             } else if (!c.flipped) {
@@ -281,7 +281,7 @@ export class Board extends Module {
 
         this.flipped += this.cell(row, col).flip();
 
-        if (0 == this.rows * this.cols - this.flipped - this.mines) {
+        if (!this.terminated && 0 == this.rows * this.cols - this.flipped - this.mines) {
             this.survive();
         }
     }
