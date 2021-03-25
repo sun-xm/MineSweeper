@@ -9,15 +9,13 @@ let content: Content | undefined;
 async function newGame(size: Size) {
     await content?.newGame(size);
 
-    let w = (content?.minWidth() ?? 0);
+    let w = Math.max(content?.minWidth() ?? 0, title?.minWidth() ?? 0);
     let h = (content?.minHeight() ?? 0) + (title?.element as HTMLElement).offsetHeight;
-    let s = remote.getCurrentWindow().getSize();
-    
-    s[0] = Math.max(s[0], w);
-    s[1] = Math.max(s[1], h);
+
+    console.debug(w + ',' + h);
 
     remote.getCurrentWindow().setMinimumSize(w, h);
-    remote.getCurrentWindow().setSize(s[0], s[1]);
+    remote.getCurrentWindow().setSize(w, h);
 }
 
 window.addEventListener('load', async ()=>{

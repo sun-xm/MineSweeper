@@ -19,32 +19,7 @@ export class Title extends Module {
 
     async onload() {
         this.element.querySelector('#close.system')?.addEventListener('click', ()=>remote.getCurrentWindow().close());
-    
         this.element.querySelector('#minimize.system')?.addEventListener('click', ()=>remote.getCurrentWindow().minimize());
-    
-        this.element.querySelector('#maximize.system')?.addEventListener('click', ()=>remote.getCurrentWindow().maximize());
-    
-        this.element.querySelector('#restore.system')?.addEventListener('click', ()=>remote.getCurrentWindow().restore());
-
-        remote.getCurrentWindow().on('maximize', ()=>{
-            let r = <HTMLElement>this.element.querySelector('#restore.system');
-            let m = <HTMLElement>this.element.querySelector('#maximize.system');
-        
-            if (r && m) {
-                r.style.display = 'block';
-                m.style.display = 'none';
-            }
-        });
-    
-        remote.getCurrentWindow().on('unmaximize', ()=>{
-            let r = <HTMLElement>this.element.querySelector('#restore.system');
-            let m = <HTMLElement>this.element.querySelector('#maximize.system');
-        
-            if (r && m) {
-                r.style.display = 'none';
-                m.style.display = 'block';
-            }
-        });
 
         this.game = await Menu.Dropdown.create(<HTMLElement>this.element.querySelector('#game.menu'), { attribute: 'path'});
         this.game.onCommand('exit', ()=>remote.getCurrentWindow().close());
@@ -58,6 +33,27 @@ export class Title extends Module {
         } else {
             return Size.Large;
         }
+    }
+
+    minWidth() {
+        let capWidth = 0;
+
+        let children = this.element.querySelector('#caption')?.children;
+        if (children) {
+            for (let i = 0; i <children.length; i++) {
+                let c = children[i];
+
+                if (!c.classList.contains('space')) {
+                    capWidth += (c as HTMLElement).offsetWidth;
+                }
+            }
+        }
+
+        return (this.element.querySelector('#close.system') as HTMLElement).offsetWidth + 
+               (this.element.querySelector('#minimize.system') as HTMLElement).offsetWidth +
+               (this.element.querySelector('#game.menu') as HTMLElement).offsetWidth +
+               (this.element.querySelector('#icon') as HTMLElement).offsetWidth +
+               capWidth;
     }
 
     game: Menu.Dropdown | undefined;

@@ -1,7 +1,7 @@
 import { app, BrowserWindow } from 'electron'
 
 function createWindow() {
-    let win = new BrowserWindow({ width: 542, height: 631, frame: false, show: false, webPreferences: { nodeIntegration: true, enableRemoteModule: true }});
+    let win = new BrowserWindow({ resizable: false, maximizable: false, frame: false, show: false, webPreferences: { nodeIntegration: true, enableRemoteModule: true }});
     win.once('ready-to-show', ()=>win.show());
     win.setMenu(null);
     win.loadFile('html/index.html');
