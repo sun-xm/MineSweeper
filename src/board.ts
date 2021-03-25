@@ -89,6 +89,14 @@ class Cell {
         return <HTMLElement>this.element.children[0]!;
     }
 
+    width() {
+        return this.element.offsetWidth;
+    }
+
+    height() {
+        return this.element.offsetHeight;
+    }
+
     row: number;
     col: number;
     board: Board;
@@ -221,6 +229,14 @@ export class Board extends Module {
                 callback(this.cell(r, c));
             }
         }
+    }
+
+    minWidth() {
+        return this.lines.length > 0 ? (this.lines[0].cells[0].width() * this.lines[0].cells.length) : 0;
+    }
+
+    minHeight() {
+        return this.lines.length > 0 ? this.lines[0].cells[0].height() * this.lines.length : 0;
     }
 
     private unload() {

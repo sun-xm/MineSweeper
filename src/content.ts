@@ -43,6 +43,14 @@ export class Content extends Module {
         this.board = await Module.load<Board>(this.element.querySelector('#board')!);
         this.board?.load(rows, cols, mines, this.counter!, this.quick!);
     }
+
+    minWidth () {
+        return Math.max(this.counter?.minWidth() ?? 0, (this.board?.minWidth() ?? 0) + 60);
+    }
+
+    minHeight() {
+        return (this.counter?.minHeight() ?? 0) + (this.board?.minHeight() ?? 0) + 60;
+    }
     
     quick: (()=>boolean) | undefined;
     counter: Counter | undefined;

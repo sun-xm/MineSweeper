@@ -53,6 +53,24 @@ export class Counter extends Module {
         (<HTMLElement>this.element.querySelector('#left')).innerHTML = html;
     }
 
+    minWidth() {
+        let w = 0;
+
+        for (let i = 0; i < this.element.children.length; i++) {
+            let c = this.element.children[i];
+
+            if (!c.classList.contains('space')) {
+                w += (c as HTMLElement).offsetWidth;
+            }
+        }
+
+        return w;
+    }
+
+    minHeight() {
+        return (this.element as HTMLElement).offsetHeight;
+    }
+
     private static toDigits(n: number) {
         n = Math.max(0, Math.min(999, n));
 
