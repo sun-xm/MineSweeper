@@ -51,6 +51,10 @@ export class Content extends Module {
     minHeight() {
         return (this.counter?.minHeight() ?? 0) + (this.board?.minHeight() ?? 0) + 60;
     }
+
+    getCellSize() {
+        return this.board?.getCellSize() ?? 0;
+    }
     
     quick: (()=>boolean) | undefined;
     counter: Counter | undefined;

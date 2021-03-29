@@ -12,10 +12,26 @@ async function newGame(size: Size) {
     let w = Math.max(content?.minWidth() ?? 0, title?.minWidth() ?? 0);
     let h = (content?.minHeight() ?? 0) + (title?.element as HTMLElement).offsetHeight;
 
-    console.debug(w + ',' + h);
-
     remote.getCurrentWindow().setMinimumSize(w, h);
     remote.getCurrentWindow().setSize(w, h);
+}
+
+function cellSize(delta: number) {
+    if (content) {
+        let d = delta / 100;
+        let s = Math.max(30, Math.min(40, content.getCellSize() + d));
+
+        let size = document.head.querySelector('.cell-size');
+        if (size) {
+            size.innerHTML = `#content .cell div{ width: ${s - 4}px; height: ${s - 4}px; font-size: ${ s * 2 / 3 }px; } #content .cell div img { width: ${s - 6}px; height: ${s - 6}px; }`
+
+            let w = Math.max(content?.minWidth() ?? 0, title?.minWidth() ?? 0);
+            let h = (content?.minHeight() ?? 0) + (title?.element as HTMLElement).offsetHeight;
+        
+            remote.getCurrentWindow().setMinimumSize(w, h);
+            remote.getCurrentWindow().setSize(w, h);
+        }
+    }
 }
 
 window.addEventListener('load', async ()=>{
@@ -37,4 +53,6 @@ window.addEventListener('load', async ()=>{
             content.quick = q.isChecked.bind(q);
         }
     }
+
+    document.addEventListener('wheel', (e)=>{ cellSize((e as WheelEvent).deltaY); });
 });

@@ -239,6 +239,10 @@ export class Board extends Module {
         return this.lines.length > 0 ? this.lines[0].cells[0].height() * this.lines.length : 0;
     }
 
+    getCellSize() {
+        return this.lines.length > 0 ? this.lines[0].cells[0].width() : 0;
+    }
+
     private unload() {
         this.element.removeEventListener('module_unload', this.unload);
         this.element.innerHTML = '';
