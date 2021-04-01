@@ -1,4 +1,4 @@
-import { remote } from 'electron'
+import { remote, ipcRenderer } from 'electron'
 import { Module } from './module';
 import { Config } from './config';
 import { Title } from './title';
@@ -37,7 +37,7 @@ function cellSize(delta: number) {
 }
 
 window.addEventListener('load', async ()=>{
-    await Config.load();
+    Config.load();
 
     title = await Module.load<Title>(document.getElementById('title')!);
     await title?.onload();
@@ -55,6 +55,8 @@ window.addEventListener('load', async ()=>{
 
     cellSize(0);
     document.addEventListener('wheel', (e)=>{ cellSize((e as WheelEvent).deltaY); });
+
+    ipcRenderer.send('ready-to-show');
 });
 
 window.addEventListener('unload', ()=>{

@@ -1,8 +1,8 @@
-import { app, BrowserWindow } from 'electron'
+import { app, BrowserWindow, ipcMain } from 'electron'
 
 function createWindow() {
     let win = new BrowserWindow({ resizable: false, maximizable: false, frame: false, show: false, webPreferences: { nodeIntegration: true, enableRemoteModule: true }});
-    win.once('ready-to-show', ()=>win.show());
+    ipcMain.once('ready-to-show', ()=>win.show());
     win.setMenu(null);
     win.loadFile('html/index.html');
     // win.webContents.openDevTools({ mode: 'detach' });

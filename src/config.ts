@@ -1,9 +1,10 @@
 import * as fs from 'fs'
 
 export class Config {
-    static async load() {
+    static load() {
         try {
-            Config.inst = await (await fetch('config.json')).json();
+            let json = fs.readFileSync('config.json', { encoding: 'utf8' });
+            Config.inst = JSON.parse(json);
         } catch (e) {
             console.debug(e);
         }
