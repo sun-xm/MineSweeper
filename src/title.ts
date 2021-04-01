@@ -1,15 +1,11 @@
 import { remote } from 'electron';
 import { Module } from './module';
+import { newGame } from './index';
+import { Config, Scale } from './config';
 import * as Menu from './menu';
 
 export function module(elem: Element) {
     return new Title(elem);
-}
-
-export enum Size {
-    Small,
-    Medium,
-    Large
 }
 
 export class Title extends Module {
@@ -22,16 +18,44 @@ export class Title extends Module {
         this.element.querySelector('#minimize.system')?.addEventListener('click', ()=>remote.getCurrentWindow().minimize());
 
         this.game = await Menu.Dropdown.create(<HTMLElement>this.element.querySelector('#game.menu'), { attribute: 'path'});
-        this.game.onCommand('exit', ()=>remote.getCurrentWindow().close());
+        this.game.onCommand('new',    ()=>{ newGame(); })
+        this.game.onCommand('quick',  ()=>{ Config.inst.quick = this.game?.item('quick')?.isChecked(); })
+        this.game.onCommand('small',  ()=>{ Config.inst.scale = this.scale(); newGame(); })
+        this.game.onCommand('medium', ()=>{ Config.inst.scale = this.scale(); newGame(); })
+        this.game.onCommand('large',  ()=>{ Config.inst.scale = this.scale(); newGame(); })
+        this.game.onCommand('exit',   ()=>{ remote.getCurrentWindow().close(); });
+
+        switch (Config.inst.scale) {
+            case Scale.Small: {
+                this.game.item('small')?.check();
+                break;
+            }
+
+            case Scale.Medium: {
+                this.game.item('medium')?.check();
+                break;
+            }
+
+            case Scale.Large: {
+                this.game.item('large')?.check();
+                break;
+            }
+        }
+
+        if (Config.inst.quick) {
+            this.game.item('quick')?.check();
+        } else {
+            this.game.item('quick')?.uncheck();
+        }
     }
 
-    size() {
+    scale() {
         if (this.game?.item('small')?.isChecked()) {
-            return Size.Small;
+            return Scale.Small;
         } else if (this.game?.item('medium')?.isChecked()) {
-            return Size.Medium;
+            return Scale.Medium;
         } else {
-            return Size.Large;
+            return Scale.Large;
         }
     }
 

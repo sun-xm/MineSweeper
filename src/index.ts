@@ -1,13 +1,14 @@
 import { remote } from 'electron'
 import { Module } from './module';
-import { Title, Size } from './title'
-import { Content } from './content'
+import { Config } from './config';
+import { Title } from './title';
+import { Content } from './content';
 
 let title: Title | undefined;
 let content: Content | undefined;
 
-async function newGame(size: Size) {
-    await content?.newGame(size);
+export async function newGame() {
+    await content?.newGame();
 
     let w = Math.max(content?.minWidth() ?? 0, title?.minWidth() ?? 0);
     let h = (content?.minHeight() ?? 0) + (title?.element as HTMLElement).offsetHeight;
@@ -19,7 +20,8 @@ async function newGame(size: Size) {
 function cellSize(delta: number) {
     if (content) {
         let d = delta / 100;
-        let s = Math.max(30, Math.min(40, content.getCellSize() + d));
+        let s = Math.max(30, Math.min(40, Config.inst.cellSize + d));
+        Config.inst.cellSize = s;
 
         let size = document.head.querySelector('.cell-size');
         if (size) {
@@ -35,18 +37,15 @@ function cellSize(delta: number) {
 }
 
 window.addEventListener('load', async ()=>{
+    await Config.load();
+
     title = await Module.load<Title>(document.getElementById('title')!);
     await title?.onload();
 
     content = await Module.load<Content>(document.getElementById('content')!);
     if (content) {
         await content.load();
-        newGame(title?.size()!);
-
-        title?.game?.onCommand('new',    ()=>newGame(title?.size()!));
-        title?.game?.onCommand('small',  ()=>newGame(title?.size()!));
-        title?.game?.onCommand('medium', ()=>newGame(title?.size()!));
-        title?.game?.onCommand('large',  ()=>newGame(title?.size()!));
+        newGame();
 
         let q = title?.game?.item('quick');
         if (q) {
@@ -54,5 +53,10 @@ window.addEventListener('load', async ()=>{
         }
     }
 
+    cellSize(0);
     document.addEventListener('wheel', (e)=>{ cellSize((e as WheelEvent).deltaY); });
+});
+
+window.addEventListener('unload', ()=>{
+    Config.save();
 });

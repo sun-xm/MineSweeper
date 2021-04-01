@@ -1,7 +1,7 @@
 import { Counter } from './counter';
 import { Module } from './module';
 import { Board } from './board';
-import { Size } from './title'
+import { Config, Scale } from './config'
 
 export class Content extends Module {
     constructor(e: Element) {
@@ -12,27 +12,27 @@ export class Content extends Module {
         this.counter = await Module.load<Counter>(this.element.querySelector('#counter')!);
     }
     
-    async newGame(size: Size) {
+    async newGame() {
         let rows: number;
         let cols: number;
         let mines: number;
 
-        switch (size) {
-            case Size.Small: {
+        switch (<Scale>Config.inst.scale) {
+            case Scale.Small: {
                 rows  = 10;
                 cols  = 10;
                 mines = 20;
                 break;
             }
 
-            case Size.Medium: {
+            case Scale.Medium: {
                 rows  = 16;
                 cols  = 16;
                 mines = 40;
                 break;
             }
 
-            case Size.Large: {
+            case Scale.Large: {
                 rows  = 20;
                 cols  = 20;
                 mines = 80;

@@ -105,3 +105,6 @@ dist
 
 # out dir
 out/
+
+# runtime config
+config.json
