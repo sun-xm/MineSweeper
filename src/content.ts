@@ -19,9 +19,9 @@ export class Content extends Module {
 
         switch (<Scale>Config.inst.scale) {
             case Scale.Small: {
-                rows  = 10;
-                cols  = 10;
-                mines = 20;
+                rows  = 9;
+                cols  = 9;
+                mines = 10;
                 break;
             }
 
@@ -33,9 +33,9 @@ export class Content extends Module {
             }
 
             case Scale.Large: {
-                rows  = 20;
-                cols  = 20;
-                mines = 80;
+                rows  = 16;
+                cols  = 30;
+                mines = 99;
                 break;
             }
         }
