@@ -1,6 +1,14 @@
 export class Module {
     static async create<M extends Module>(html: { html?: string, path?: string }, module?: string) {
-        html.html = html.html ? html.html : (html.path ? await (await fetch(html.path)).text() : undefined);
+        if (!html.html) {
+            try {
+                html.html = html.path ? await (await fetch(html.path)).text() : undefined;
+            } catch (e) {
+                console.debug('Module.create(): failed to fetch ' + html.path + '. ' + e);
+                return undefined;
+            }
+        }
+
         if (!html.html) {
             console.debug('Module.create(): undefined html content');
             return undefined;
@@ -25,10 +33,23 @@ export class Module {
 
     static async load<M extends Module>(elem: Element, html?: { html?: string, path?: string }, module?: string) {
         if (html) {
-            html.html = (null != html.html) ? html.html : (html.path ? await (await fetch(html.path)).text() : undefined);
+            if (!html.html) {
+                try {
+                    html.html = html.path ? await (await fetch(html.path)).text() : undefined;
+                } catch (e) {
+                    console.debug('Module.load(): failed to fetch ' + html.path + '. ' + e);
+                    return undefined;
+                }
+            }
         } else {
-            html = { html: elem.getAttribute('include') ?? undefined };
-            html.html = html.html ? await (await fetch(html.html)).text() : undefined;
+            html = { html: undefined, path: elem.getAttribute('include') ?? undefined };
+            
+            try {
+                html.html = html.path ? await (await fetch(html.path)).text() : undefined;
+            } catch (e) {
+                console.debug('Module.load(): failed to fetch include property ' + html.path + '. ' + e);
+                return undefined;
+            }
         }
 
         module = module ? module : elem.getAttribute('module') ?? undefined;
