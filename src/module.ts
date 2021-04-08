@@ -43,7 +43,7 @@ export class Module {
             }
         } else {
             html = { html: undefined, path: elem.getAttribute('include') ?? undefined };
-            
+
             try {
                 html.html = html.path ? await (await fetch(html.path)).text() : undefined;
             } catch (e) {
@@ -60,7 +60,7 @@ export class Module {
 
         elem.dispatchEvent(new Event('module_unload'));
 
-        if (null != html.html) {
+        if (html.html) {
             elem.innerHTML = html.html;
         }
 
