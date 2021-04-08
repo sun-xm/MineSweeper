@@ -4,7 +4,7 @@ export async function include(elem: Element, path?: string): Promise<Element> {
     }
 
     if (!path) {
-        throw 'Neither path is defined or element has a valid replace attribute';
+        return Promise.reject('Dynamic.include(): neither path is defined nor element has a valid include attribute');
     }
 
     elem.innerHTML = await (await fetch(path)).text();
@@ -25,7 +25,7 @@ export async function replace(elem: Element, path?: string): Promise<Element> {
     }
 
     if (!path) {
-        throw 'Neither path is defined or element has a valid replace attribute';
+        return Promise.reject('Dynamic.replace(): neither path is defined nor element has a valid replace attribute');
     }
 
     let div = document.createElement('div');
