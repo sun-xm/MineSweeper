@@ -1,4 +1,4 @@
-import { app, BrowserWindow, ipcMain } from 'electron'
+import { app, BrowserWindow, ipcMain } from 'electron';
 
 function createWindow() {
     let win = new BrowserWindow({ resizable: false, maximizable: false, frame: false, show: false, webPreferences: { nodeIntegration: true, enableRemoteModule: true }});

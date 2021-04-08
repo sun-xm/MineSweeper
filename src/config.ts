@@ -1,4 +1,4 @@
-import * as fs from 'fs'
+import * as fs from 'fs';
 
 export class Config {
     static load() {

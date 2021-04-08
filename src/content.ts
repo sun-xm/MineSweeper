@@ -1,7 +1,7 @@
 import { Counter } from './counter';
 import { Module } from './module';
 import { Board } from './board';
-import { Config, Scale } from './config'
+import { Config, Scale } from './config';
 
 export class Content extends Module {
     constructor(e: Element) {

@@ -1,4 +1,3 @@
-import { TouchBarSlider } from 'electron';
 import { Module } from './module';
 
 export class Counter extends Module {
