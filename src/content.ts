@@ -35,7 +35,7 @@ export class Content extends Module {
             case Scale.Large: {
                 rows  = 16;
                 cols  = 30;
-                mines = 99;
+                mines = 80;
                 break;
             }
         }

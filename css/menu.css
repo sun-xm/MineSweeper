@@ -65,7 +65,7 @@
 .dropdown-menu>.separator,
 .popup-menu>.separator {
     background-color: black;
-    height: 1px;
+    height: 0.5px;
     margin: 5px 5px;
     padding: 0px;
 }

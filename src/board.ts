@@ -194,8 +194,14 @@ export class Board extends Module {
 
         this.forEachCell((c=>{
             if (c.isMine) {
-                if (State.Flagged != c.state) {
-                    this.flagged += c.flag();
+                switch (c.state) {
+                    case State.Questioned: {
+                        this.flagged += c.flag();
+                    }
+                    // fall through
+                    case State.None: {
+                        this.flagged += c.flag();
+                    }
                 }
             } else if (!c.flipped) {
                 this.flipped += c.flip();
