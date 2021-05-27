@@ -6,7 +6,7 @@
   "scripts": {
     "start": "tsc -p ./ && electron .",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "package": "electron-packager ./ --all"
+    "package": "electron-packager ./"
   },
   "keywords": [],
   "author": "sean",
