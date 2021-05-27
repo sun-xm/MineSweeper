@@ -24,6 +24,10 @@
     user-select: none;
 }
 
+#content .cell div:hover {
+    background-color: #f0f0f0;
+}
+
 #content .cell.flipped div {
     background-color: transparent;
 }
