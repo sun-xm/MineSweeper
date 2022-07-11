@@ -7,7 +7,7 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Debug",
+            "name": "Debug Main Process",
             "skipFiles": [
                 "<node_internals>/**"
             ],
@@ -17,7 +17,23 @@
             },
             "args": ["."],
             "cwd": "${workspaceFolder}",
-            "preLaunchTask": "tsc: build - tsconfig.json" 
+            "preLaunchTask": "tsc: build - tsconfig.json"
+        },
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Debug Renderer Process",
+            "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron",
+            "windows": {
+                "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron.cmd"
+            },
+            "runtimeArgs": [
+                ".",
+                "--remote-debugging-port=9222"
+            ],
+            "sourceMaps": true,
+            "webRoot": "${workspaceFolder}",
+            "preLaunchTask": "tsc: build - tsconfig.json"
         }
     ]
 }

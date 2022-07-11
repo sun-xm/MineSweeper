@@ -73,7 +73,7 @@ export class Title extends Module {
             }
         }
 
-        return (this.element.querySelector('#close.system') as HTMLElement).offsetWidth + 
+        return (this.element.querySelector('#close.system') as HTMLElement).offsetWidth +
                (this.element.querySelector('#minimize.system') as HTMLElement).offsetWidth +
                (this.element.querySelector('#game.menu') as HTMLElement).offsetWidth +
                (this.element.querySelector('#icon') as HTMLElement).offsetWidth +

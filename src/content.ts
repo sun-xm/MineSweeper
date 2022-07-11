@@ -11,7 +11,7 @@ export class Content extends Module {
     async load() {
         this.counter = await Module.load<Counter>(this.element.querySelector('#counter')!);
     }
-    
+
     async newGame() {
         let rows: number;
         let cols: number;
@@ -55,7 +55,7 @@ export class Content extends Module {
     getCellSize() {
         return this.board?.getCellSize() ?? 0;
     }
-    
+
     quick: (()=>boolean) | undefined;
     counter: Counter | undefined;
     board: Board | undefined;

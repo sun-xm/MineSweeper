@@ -63,7 +63,7 @@ class Cell {
         if (this.flipped) {
             return 0;
         }
-        
+
         switch (this.state) {
             case State.None: {
                 this.inner().innerHTML = '<img src="img/flag.svg" />'
@@ -100,7 +100,7 @@ class Cell {
     row: number;
     col: number;
     board: Board;
-    
+
     element= <HTMLElement>Cell.template.cloneNode(true);
     isMine  = false;
     flipped = false;
@@ -159,7 +159,7 @@ export class Board extends Module {
                 c.element.addEventListener('click', this.onClickCell.bind(this));
                 c.element.addEventListener('contextmenu', this.onRClickCell.bind(this));
             }
-            
+
             this.element.append(l.element);
         }
 

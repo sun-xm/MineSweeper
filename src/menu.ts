@@ -184,7 +184,7 @@ abstract class Menu {
         this.subm = null;
         this.sour = null;
         this.items = new Map<string, Item>();
-        
+
         this.cont = document.createElement('div');
         this.cont.style.display  = 'none';
         this.cont.style.position = 'absolute';
@@ -367,7 +367,7 @@ export class Dropdown extends Menu {
 
     protected showMenu() {
         this.sour!.classList.add('active');
-        
+
         let r = this.sour!.getBoundingClientRect();
         this.cont.style.top  = px(r.top + r.height);
         this.cont.style.left = px(r.left);
@@ -404,7 +404,7 @@ export class Popup extends Menu {
     public static async create(content: { html?: string, path?: string, element?: HTMLElement, attribute?: string }) : Promise<Popup> {
         let m = new Popup();
         await m.load(content);
-        
+
         m.cont.classList.add('popup-menu');
         document.body.appendChild(m.cont);
 

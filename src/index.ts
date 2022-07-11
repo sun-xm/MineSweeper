@@ -29,7 +29,7 @@ function cellSize(delta: number) {
 
             let w = Math.max(content?.minWidth() ?? 0, title?.minWidth() ?? 0);
             let h = (content?.minHeight() ?? 0) + (title?.element as HTMLElement).offsetHeight;
-        
+
             remote.getCurrentWindow().setMinimumSize(w, h);
             remote.getCurrentWindow().setSize(w, h);
         }
